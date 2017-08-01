@@ -2,11 +2,7 @@
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
 #include <iostream>
-#include<omp.h>
-#include<sstream>
-#include<stdio.h>
-#include<vector>
-#include<math.h>
+#include <omp.h>
 
 
 namespace py = pybind11;
@@ -28,7 +24,8 @@ int jk_numpy(py::array_t<double> I, py::array_t<double> D,
   double * J_data = static_cast<double *>(J_info.ptr);
   double * K_data = static_cast<double *>(K_info.ptr);
 
-#pragma omp parallel for schedule(dynamic)
+// Must specify num of threads to prevent Python single threading
+#pragma omp parallel for schedule(dynamic) num_threads(4)
 for(size_t p = 0; p < d; p++)
   {
     for(size_t q = 0; q <= p; q++)

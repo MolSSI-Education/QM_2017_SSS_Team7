@@ -13,6 +13,7 @@ set(PYTHON_EXECUTABLE $ENV{CONDA_PREFIX}/bin/python3)
 
 # FLAGS
 set(CMAKE_CXX_FLAGS "-Ofast -fopenmp -I${CONDA_PREFIX}/include")
+set(CMAKE_EXE_LINKER_FLAGS "-fopenmp")
 
 # Find the pybind11 in the conda path
 set(PYBIND11_CPP_STANDARD -std=c++11)
